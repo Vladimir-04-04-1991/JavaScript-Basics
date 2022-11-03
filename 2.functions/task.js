@@ -1,6 +1,6 @@
 // Задание 1
 function getArrayParams(arr) {
-  let min = 0, max = 0, sum = 0, avg = 0;
+  let min = Infinity, max = -Infinity, sum = 0, avg = 0;
   for(let i = 0; i < arr.length; i++) {
     if(arr[i] < min) {
       min = arr[i];
@@ -27,8 +27,8 @@ function worker(arr) {
 function makeWork(arrOfArr, func) {
   let max = 0;
   for(let i = 0; i < arrOfArr.length; i++) {
-    if(max < worker(arrOfArr[i])) {
-      max = worker(arrOfArr[i]);
+    if(max < func(arrOfArr[i])) {
+      max = func(arrOfArr[i]);
     }
   }
   
@@ -48,7 +48,6 @@ function worker2(arr) {
       max = arr[i];
     }
   }
-  difference = Math.abs(max - min);
   
-  return difference;
+  return Math.abs(max - min);
 }
