@@ -27,8 +27,9 @@ function worker(arr) {
 function makeWork(arrOfArr, func) {
   let max = 0;
   for(let i = 0; i < arrOfArr.length; i++) {
-    if(max < func(arrOfArr[i])) {
-      max = func(arrOfArr[i]);
+    const funcResult = func(arrOfArr[i]);
+    if(max < funcResult ) {
+      max = funcResult;
     }
   }
   
