@@ -2,20 +2,8 @@ function compareArrays(arr1, arr2) {
   let result;
 
   // Ваш код
-  let comparisonArray = [];
-  if(arr1.length === arr2.length) {
-    for(let i = 0; i < arr1.length; i++){
-      if(arr1[i] === arr2[i]){
-        comparisonArray.push(true);
-      } else {
-        comparisonArray.push(false);
-      }
-    }
-  } else {
-    comparisonArray.push(false);
-  }
-
-  result = comparisonArray.every(element => element === true);
+ 
+  result = arr1.length === arr2.length && arr1.every((element, index) => element === arr2[index]);
   return result; // boolean
 }
 
