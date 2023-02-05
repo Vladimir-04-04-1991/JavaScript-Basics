@@ -45,22 +45,22 @@ class Book extends PrintEditionItem {
 }
 
 class NovelBook extends Book {
-    constructor( name, author, releaseDate, pagesCount  ) {
-        super(name, author, releaseDate, pagesCount );
+    constructor(author, name,  releaseDate, pagesCount ) {
+        super(author, name,  releaseDate, pagesCount );
         this.type = "novel";
     }
 }
 
 class FantasticBook extends Book {
-    constructor( name, author, releaseDate, pagesCount ) {
-        super(name, author, releaseDate, pagesCount );
+    constructor(author, name,  releaseDate, pagesCount ) {
+        super(author, name,  releaseDate, pagesCount );
         this.type = "fantastic";
     }    
 }
 
 class DetectiveBook extends Book {
-    constructor( name, author, releaseDate, pagesCount ) {
-        super(name, author, releaseDate, pagesCount );
+    constructor(author, name,  releaseDate, pagesCount ) {
+        super(author, name,  releaseDate, pagesCount );
         this.type = "detective";
     }    
 }
@@ -82,7 +82,7 @@ class Library {
     findBookBy(type, value) {
         for(let i = 0; i < this.books.length; i++){
             if((this.books[i][type]) === value){
-                return this.books[i]['name'];
+                return this.books[i];
             }
         }
         
@@ -93,8 +93,8 @@ class Library {
         let rezult = null;
         for(let i = 0; i < this.books.length; i++) {
             if((this.books[i].name) === bookName){
-                rezult = this.books[i].name;
-                delete this.books[i];
+                rezult = this.books[i];
+                this.books.splice([i], 1);
                 return rezult;
             }
         }
@@ -102,3 +102,4 @@ class Library {
         return rezult;
     }
 }
+
