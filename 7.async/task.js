@@ -14,18 +14,21 @@ class AlarmClock {
             console.warn('Уже присутствует звонок на это же время');
             return;
         }
-        this.alarmCollection.push({time, callback, id, canCall: true});
+        this.alarmCollection.push({time, callback, id});
     }
 
-    removeClock(time) {
+    removeClock(id) {
         const lengthAlarmCollection = this.alarmCollection.length;
-        this.alarmCollection = this.alarmCollection.filter(alarm => alarm.time !== time);
+        this.alarmCollection = this.alarmCollection.filter(alarm => alarm.id !== id);
         return lengthAlarmCollection !== this.alarmCollection;
     }
 
     getCurrentFormattedTime() {
-        let date = new Date;
-        return date.getHours() + ":" + date.getMinutes();
+        let date = new Date().toLocaleTimeString("ru-Ru", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        return date;
     }
 
     start() {
@@ -35,10 +38,7 @@ class AlarmClock {
         this.timerId = setInterval(() => {
             this.alarmCollection.forEach(alarm => {
                 if(this.getCurrentFormattedTime() === alarm.time){ 
-                    if(this.alarmCollection.canCall) {
-                        this.alarmCollection.canCall = false;
-                        alarm.callback();
-                    }
+                    alarm.callback();                    
                 }
             })
         }, 1000)        
@@ -47,12 +47,6 @@ class AlarmClock {
     stop() {        
         clearInterval(this.timerId);
         this.timerId = null;           
-    }
-
-    resetAllCalls() {
-        this.alarmCollection.forEach(() => {
-            this.alarmCollection.canCall = true;
-        });
     }
 
     clearAlarms() {
